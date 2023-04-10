@@ -4,6 +4,10 @@ import requests
 from bs4 import BeautifulSoup
 import sqlite3
 import json
+from datetime import date
+
+today = date.today()
+today_file_name = today.strftime("%d%m%Y") + "_verge.csv"
 
 conn = sqlite3.connect('theverge.db')
 curr = conn.cursor()
@@ -37,6 +41,11 @@ for article in articles:
 
 filename = 'ddmmyyy_verge.csv'
 with open(filename, 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['id', 'URL', 'headline', 'author', 'date'])
+    writer.writerows(data)
+
+with open(today_file_name, 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['id', 'URL', 'headline', 'author', 'date'])
     writer.writerows(data)
