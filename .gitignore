@@ -1,3 +1,5 @@
 .idea
 theverge.db
 *.csv
+venv/
+*__pycache__
